@@ -46,30 +46,36 @@ public class GukLogic {
     private final int gukCount;
     int points;
 
+    //
+    //очищает смерти еслу жук жив добавляем в новый список
+    //
 
-    //очищает смерти еслу жук жив додавлем в новый список
     private void removeDeads() {
 
-        ArrayList<Guk> newBugsList = new ArrayList<>(5);
+        ArrayList<Guk> newGukList = new ArrayList<>(5);
         for (Guk guk : gukList) {
             //bug.die(); // жук уимрает
             if (guk.alive) {
-                newBugsList.add(guk);
+                newGukList.add(guk);
             }
         }
-        gukList = newBugsList;
+        gukList = newGukList;
     }
 
-
+    //
     //отрисовка жука
+    //
+
     void drawBugs(Canvas canvas) {
         for (Guk bug : gukList) {
             canvas.drawBitmap(bug.texture, bug.matrix, null);
         }
     }
 
-
+    //
     //создание жука
+    //
+
     private void createBug() {
         Guk bug = new Guk(); // жук
         bug.texture = BitmapFactory.decodeResource(view.getResources(), R.drawable.redguklive); // задаем текстуру
@@ -106,8 +112,10 @@ public class GukLogic {
         bug.matrix.postTranslate(bug.x, bug.y);
     }
 
-
+    //
     //обработка движений жука
+    //
+
     private void handleBug(Guk guk) {
         if (!guk.isRunning) { // если бежит
             guk.destX = (float) Math.random() * view.getWidth(); // задаем направление по иску
@@ -138,7 +146,10 @@ public class GukLogic {
         }
     }
 
+    //
     //обработка нажатия
+    //
+
     void touchEvent(float x, float y) {
         boolean hit = false;
         for (Guk guk : gukList) {
@@ -166,7 +177,10 @@ public class GukLogic {
         }
     }
 
+    //
     //конструктор
+    //
+
     GukLogic(int bugsCount, View view) {
         points = 0; //очки
         this.view = view; // вьюшка
@@ -174,8 +188,10 @@ public class GukLogic {
         gukList = new ArrayList<>(5); // список жуков
     }
 
-
+    //
     //обновление
+    //
+
     void update() {
         removeDeads(); // удаление сметрей
         while (gukList.size() < gukCount) {

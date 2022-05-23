@@ -21,13 +21,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //
+        // Убрали верхний бар, с уровнем заряда и временем, во время работы приложения
+        //
+
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         view = new GukView(this);
         setContentView(view);
 
+        //
         //таймер и обработчик
+        //
+
         handler = new Handler();
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
